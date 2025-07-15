@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { EstoqueTable, Produto } from "@/components/EstoqueTable";
 import { EstoqueMetricas } from "@/components/EstoqueMetricas";
+import { AdicionarProduto } from "@/components/AdicionarProduto";
+import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
-  // Dados mockados de materiais elétricos
-  const produtos: Produto[] = [
+  // Dados iniciais de materiais elétricos
+  const produtosIniciais: Produto[] = [
     { id: 1, nome: "Fio elétrico 2,5mm (rolo 100m)", estoque: 25 },
     { id: 2, nome: "Disjuntor 20A", estoque: 8 },
     { id: 3, nome: "Tomada 10A com terra", estoque: 45 },
@@ -18,6 +21,46 @@ const Index = () => {
     { id: 12, nome: "Plugue 10A", estoque: 35 },
   ];
 
+  const [produtos, setProdutos] = useState<Produto[]>(produtosIniciais);
+
+  // Função para adicionar novo produto
+  const handleAdicionarProduto = (novoProduto: Omit<Produto, 'id'>) => {
+    const novoId = Math.max(...produtos.map(p => p.id)) + 1;
+    const produto: Produto = {
+      id: novoId,
+      ...novoProduto
+    };
+    setProdutos([...produtos, produto]);
+    toast({
+      title: "Produto adicionado!",
+      description: `${produto.nome} foi adicionado ao estoque.`,
+    });
+  };
+
+  // Função para editar produto
+  const handleEditarProduto = (id: number, produtoAtualizado: Omit<Produto, 'id'>) => {
+    setProdutos(produtos.map(produto => 
+      produto.id === id 
+        ? { ...produto, ...produtoAtualizado }
+        : produto
+    ));
+    toast({
+      title: "Produto atualizado!",
+      description: `${produtoAtualizado.nome} foi atualizado com sucesso.`,
+    });
+  };
+
+  // Função para deletar produto
+  const handleDeletarProduto = (id: number) => {
+    const produto = produtos.find(p => p.id === id);
+    setProdutos(produtos.filter(produto => produto.id !== id));
+    toast({
+      title: "Produto removido!",
+      description: `${produto?.nome} foi removido do estoque.`,
+      variant: "destructive",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto py-8 px-4">
@@ -31,9 +74,18 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Botão Adicionar Produto */}
+        <div className="mb-6 flex justify-end">
+          <AdicionarProduto onAdicionarProduto={handleAdicionarProduto} />
+        </div>
+
         {/* Tabela de Produtos */}
         <div className="mb-8">
-          <EstoqueTable produtos={produtos} />
+          <EstoqueTable 
+            produtos={produtos}
+            onEditarProduto={handleEditarProduto}
+            onDeletarProduto={handleDeletarProduto}
+          />
         </div>
 
         {/* Seção de Métricas */}

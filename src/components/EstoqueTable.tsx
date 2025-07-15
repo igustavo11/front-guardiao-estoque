@@ -1,5 +1,7 @@
 import { TriangleAlert } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { EditarProduto } from "./EditarProduto";
+import { DeletarProduto } from "./DeletarProduto";
 
 export interface Produto {
   id: number;
@@ -9,11 +11,13 @@ export interface Produto {
 
 interface EstoqueTableProps {
   produtos: Produto[];
+  onEditarProduto: (id: number, produtoAtualizado: Omit<Produto, 'id'>) => void;
+  onDeletarProduto: (id: number) => void;
 }
 
 const ESTOQUE_MINIMO = 10;
 
-export function EstoqueTable({ produtos }: EstoqueTableProps) {
+export function EstoqueTable({ produtos, onEditarProduto, onDeletarProduto }: EstoqueTableProps) {
   return (
     <Card className="w-full">
       <div className="overflow-x-auto">
@@ -29,6 +33,9 @@ export function EstoqueTable({ produtos }: EstoqueTableProps) {
               <th className="text-left p-4 font-semibold text-foreground">
                 Status
               </th>
+              <th className="text-left p-4 font-semibold text-foreground">
+                Ações
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -43,18 +50,30 @@ export function EstoqueTable({ produtos }: EstoqueTableProps) {
                   <td className="p-4 text-foreground font-medium">
                     {produto.estoque} unidades
                   </td>
-                  <td className="p-4">
-                    {precisaReposicao ? (
-                      <div className="flex items-center gap-2 text-warning">
-                        <TriangleAlert size={16} />
-                        <span className="font-medium">Repor estoque</span>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2 text-success">
-                        <span className="font-medium">✓ Adequado</span>
-                      </div>
-                    )}
-                  </td>
+                   <td className="p-4">
+                     {precisaReposicao ? (
+                       <div className="flex items-center gap-2 text-warning">
+                         <TriangleAlert size={16} />
+                         <span className="font-medium">Repor estoque</span>
+                       </div>
+                     ) : (
+                       <div className="flex items-center gap-2 text-success">
+                         <span className="font-medium">✓ Adequado</span>
+                       </div>
+                     )}
+                   </td>
+                   <td className="p-4">
+                     <div className="flex items-center gap-2">
+                       <EditarProduto
+                         produto={produto}
+                         onEditarProduto={onEditarProduto}
+                       />
+                       <DeletarProduto
+                         produto={produto}
+                         onDeletarProduto={onDeletarProduto}
+                       />
+                     </div>
+                   </td>
                 </tr>
               );
             })}
