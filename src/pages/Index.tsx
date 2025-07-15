@@ -63,24 +63,24 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto py-8 px-4">
+      <div className="container mx-auto max-w-7xl py-4 px-4 sm:py-6 sm:px-6 lg:py-8 lg:px-8">
         {/* Cabeçalho */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">
+        <div className="text-center mb-6 sm:mb-8 lg:mb-10">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-3">
             📦 Controle de Estoque – Loja de Materiais Elétricos
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
             Acompanhe o estoque dos seus produtos e identifique itens que precisam de reposição
           </p>
         </div>
 
         {/* Botão Adicionar Produto */}
-        <div className="mb-6 flex justify-end">
+        <div className="mb-4 sm:mb-6 flex justify-center sm:justify-end">
           <AdicionarProduto onAdicionarProduto={handleAdicionarProduto} />
         </div>
 
         {/* Tabela de Produtos */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <EstoqueTable 
             produtos={produtos}
             onEditarProduto={handleEditarProduto}
@@ -89,7 +89,11 @@ const Index = () => {
         </div>
 
         {/* Seção de Métricas */}
-        <EstoqueMetricas produtos={produtos} />
+        <div className="flex justify-center">
+          <div className="w-full max-w-4xl">
+            <EstoqueMetricas produtos={produtos} />
+          </div>
+        </div>
       </div>
     </div>
   );
