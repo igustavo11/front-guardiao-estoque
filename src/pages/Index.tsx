@@ -75,7 +75,7 @@ const Index = () => {
         </div>
 
         {/* Botão Adicionar Produto */}
-        <div className="mb-4 sm:mb-6 flex justify-center sm:justify-end">
+        <div className="mb-4 sm:mb-6 flex justify-center">
           <AdicionarProduto onAdicionarProduto={handleAdicionarProduto} />
         </div>
 
