@@ -89,10 +89,8 @@ const Index = () => {
         </div>
 
         {/* Seção de Métricas */}
-        <div className="flex justify-center">
-          <div className="w-full max-w-4xl">
-            <EstoqueMetricas produtos={produtos} />
-          </div>
+        <div className="mb-6 sm:mb-8">
+          <EstoqueMetricas produtos={produtos} />
         </div>
       </div>
     </div>
