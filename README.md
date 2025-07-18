@@ -62,7 +62,7 @@ A interface é uma SPA (Single Page Application) construída com **React** e uti
 
 ```sh
 git clone 
-cd lovoble-estoque-visualizador
+cd front-guardiao-estoque
 npm install
 ```
 
@@ -111,4 +111,4 @@ Sinta-se à vontade para abrir issues ou pull requests com sugestões, melhorias
 
 ## 📄 Licença
 
-Este projeto é open-source sob a licença MIT.
+Este projeto está licenciado sob a licença **MIT**. Veja o arquivo `LICENSE` para mais detalhes.
