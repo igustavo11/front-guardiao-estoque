@@ -1,73 +1,114 @@
-# Welcome to your Lovable project
+# 🛡️ Guardião do Estoque
 
-## Project info
+## 💡 Desafio Proposto
 
-**URL**: https://lovable.dev/projects/7e74d2ea-23c7-4fd3-9a77-99c8d4915819
+### Desafio Integrador: Sistema de Controle de Estoque com Relatório de Reposição
 
-## How can I edit this code?
+Uma loja de materiais elétricos precisa de um sistema simples em PHP que liste os produtos cadastrados, seus respectivos estoques e identifique automaticamente quais produtos precisam de reposição (quando o estoque estiver abaixo de 10 unidades).
 
-There are several ways of editing your application.
+O gestor da loja também deseja visualizar:
 
-**Use Lovable**
+- A lista total de produtos e seus estoques.
+- A média de estoque da loja.
+- Quais produtos estão abaixo do estoque mínimo.
+- A porcentagem de produtos que precisam de reposição.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7e74d2ea-23c7-4fd3-9a77-99c8d4915819) and start prompting.
+**Requisitos funcionais:**
 
-Changes made via Lovable will be committed automatically to this repo.
+- Exibir todos os produtos e seus estoques usando `foreach` ou `for`.
+- Calcular e exibir a **média de estoque** dos produtos.
+- Listar os produtos com estoque **inferior a 10 unidades**.
+- Calcular a **porcentagem de produtos abaixo do estoque mínimo**.
+- Exibir um aviso ao lado dos produtos que precisam de reposição: `"⚠ Repor estoque"`.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## ✨ Sobre o projeto
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Este projeto nasceu na plataforma [Lovable](https://lovable.dev/projects/7e74d2ea-23c7-4fd3-9a77-99c8d4915819) e evoluiu com diversas funcionalidades novas, incluindo integração total com um backend próprio em **PHP + SQLite3**. O objetivo é oferecer uma solução moderna, eficiente e visualmente agradável para gestão de estoque.
 
-Follow these steps:
+A interface é uma SPA (Single Page Application) construída com **React** e utiliza animações Lottie para tornar a experiência do usuário ainda mais interativa e divertida! 🎬
+
+---
+
+## 🚀 Funcionalidades
+
+- 👀 Visualização de produtos em estoque
+- ➕ Adição de novos produtos
+- ✏️ Edição de produtos existentes
+- 🗑️ Exclusão de produtos
+- 📊 Relatórios e métricas de estoque (média, baixo estoque, porcentagem de reposição)
+- 🔗 Integração total com backend PHP/SQLite3 via API REST
+- 📱 Interface responsiva e moderna (React + Tailwind + shadcn-ui)
+- 🔔 Toasts de feedback para ações do usuário
+- 🎨 Animações Lottie nas telas para uma experiência mais rica
+- 🧑‍💻 SPA rápida e fluida
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- **Frontend:** Vite, TypeScript, React, shadcn-ui, Tailwind CSS, Lottie
+- **Backend:** PHP, SQLite3
+- **DevOps:** CI/CD com GitHub Actions Docker, deploy automático na Vercel
+
+---
+
+## 💻 Como rodar o projeto localmente
+
+### 1️⃣ Clonando os repositórios
+
+#### Frontend
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone 
+cd lovoble-estoque-visualizador
+npm install
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+#### Backend
 
-# Step 3: Install the necessary dependencies.
-npm i
+```sh
+git clone 
+cd <PASTA_BACKEND>
+# Instale as dependências do PHP se necessário
+# Certifique-se de que o PHP e o SQLite3 estão instalados
+php -S localhost:
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 2️⃣ Configurando o ambiente
+
+No frontend, crie um arquivo `.env` com:
+
+```
+VITE_BACKEND=
+```
+
+### 3️⃣ Rodando o projeto
+
+- Inicie o backend PHP (como mostrado acima)
+- Inicie o frontend:
+
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Acesse [http://localhost:5173](http://localhost:5173) para visualizar a aplicação.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## ⚙️ DevOps e Deploy
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+O projeto está sendo preparado para **CI/CD** com GitHub Actions, permitindo deploy automático na [Vercel](https://vercel.com/). Em breve, todo push na branch principal irá disparar testes e publicar a aplicação automaticamente! 🚀
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🤝 Contribuição
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Sinta-se à vontade para abrir issues ou pull requests com sugestões, melhorias ou correções! Toda contribuição é bem-vinda. 💡
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/7e74d2ea-23c7-4fd3-9a77-99c8d4915819) and click on Share -> Publish.
+## 📄 Licença
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Este projeto é open-source sob a licença MIT.
