@@ -22,11 +22,30 @@ const Index = () => {
   const fetchProdutos = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/products`);
-      const data = await res.json();
+     
+      const endpoint = '/products';
+      const url = `${API_URL.replace(/\/$/, '')}${endpoint}`;
+      const res = await fetch(url);
+      console.log('Response status:', res.status);
+      const text = await res.text();
+      console.log('Response text:', text);
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (jsonErr) {
+        console.error('Erro ao fazer parse do JSON:', jsonErr);
+        throw new Error('Resposta não é JSON válido');
+      }
+      if (!Array.isArray(data)) {
+        console.error('Resposta da API não é um array:', data);
+        toast({ title: "Erro ao buscar produtos", description: "Resposta inesperada do servidor.", variant: "destructive" });
+        setProdutos([]);
+        return;
+      }
       // Adapta para o formato do frontend
-      setProdutos((data as Array<{id:number; name:string; stock:number}>).map((p) => ({ id: p.id, nome: p.name, estoque: p.stock })));
+      setProdutos(data.map((p) => ({ id: p.id, nome: p.name, estoque: p.stock })));
     } catch (err) {
+      console.error('Erro no fetchProdutos:', err);
       toast({ title: "Erro ao buscar produtos", description: "Não foi possível carregar os produtos.", variant: "destructive" });
     } finally {
       setLoading(false);
@@ -36,7 +55,9 @@ const Index = () => {
   
   const handleAdicionarProduto = async (novoProduto: Omit<Produto, 'id'>) => {
     try {
-      await fetch(`${API_URL}/products`, {
+      const endpoint = '/products';
+      const url = `${API_URL.replace(/\/$/, '')}${endpoint}`;
+      await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: novoProduto.nome, stock: novoProduto.estoque })
@@ -51,7 +72,9 @@ const Index = () => {
  
   const handleEditarProduto = async (id: number, produtoAtualizado: Omit<Produto, 'id'>) => {
     try {
-      await fetch(`${API_URL}/products/${id}`, {
+      const endpoint = `/products/${id}`;
+      const url = `${API_URL.replace(/\/$/, '')}${endpoint}`;
+      await fetch(url, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: produtoAtualizado.nome, stock: produtoAtualizado.estoque })
@@ -67,7 +90,9 @@ const Index = () => {
   const handleDeletarProduto = async (id: number) => {
     const produto = produtos.find(p => p.id === id);
     try {
-      await fetch(`${API_URL}/products/${id}`, { method: "DELETE" });
+      const endpoint = `/products/${id}`;
+      const url = `${API_URL.replace(/\/$/, '')}${endpoint}`;
+      await fetch(url, { method: "DELETE" });
       toast({ title: "Produto removido!", description: `${produto?.nome} foi removido do estoque.`, variant: "destructive" });
       fetchProdutos();
     } catch (err) {
